@@ -14,8 +14,8 @@ namespace Morze
 {
     public partial class Form1 : Form
     {
-        //public System.Windows.Forms.Timer generalTimerObj = new System.Windows.Forms.Timer();
-        //public System.Windows.Forms.Timer timerThreadObj = new System.Windows.Forms.Timer();
+        public System.Windows.Forms.Timer generalTimerObj = new System.Windows.Forms.Timer();
+        public System.Windows.Forms.Timer timerThreadObj = new System.Windows.Forms.Timer();
         public Thread StartThreadTimer = new Thread(ThreadTimerStart(timerThreadObj));//передать параметры нужно как-то. иначе нечего запускать ведь
         public Thread StopThreadTimer = new Thread(ThreadTimerStop);
         public Thread StartGeneralTimer = new Thread(GeneralTimerStart);
