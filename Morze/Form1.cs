@@ -14,12 +14,12 @@ namespace Morze
 {
     public partial class Form1 : Form
     {
-        public System.Windows.Forms.Timer generalTimerObj = new System.Windows.Forms.Timer();
+        //public System.Windows.Forms.Timer generalTimerObj = new System.Windows.Forms.Timer();
         public System.Windows.Forms.Timer timerThreadObj = new System.Windows.Forms.Timer();
         public Thread StartThreadTimer = new Thread(ThreadTimerStart(timerThreadObj));//передать параметры нужно как-то. иначе нечего запускать ведь
         public Thread StopThreadTimer = new Thread(ThreadTimerStop);
         public Thread StartGeneralTimer = new Thread(GeneralTimerStart);
-        public Thread StopGeneralTimer= new Thread(GeneralTimerStop);
+        public Thread StopGeneralTimer = new Thread(GeneralTimerStop);
         public int lengthOfThreadTimer = 0;
         string StringOfSignal { get; set; } = "";
         public Dictionary<string, char> ABC = new Dictionary<string, char>
@@ -67,10 +67,10 @@ namespace Morze
             generalTimerObj = timer1;
             timerThreadObj = timerOfThread;
         }
+
         public static void CountTime(object timerObj)
         {
             System.Windows.Forms.Timer timer = (System.Windows.Forms.Timer)timerObj;
-            
         }
 
         #region ThreadofTimers
@@ -79,16 +79,19 @@ namespace Morze
             var timer = (System.Windows.Forms.Timer)timerofThread;
             timer.Start();
         }
+
         public static void ThreadTimerStop(object timerofThread)
         {
             var timer = (System.Windows.Forms.Timer)timerofThread;
             timer.Stop();
         }
+
         public static void GeneralTimerStart(object generalTimer)
         {
             var timer = (System.Windows.Forms.Timer)generalTimer;
             timer.Start();
         }
+
         public static void GeneralTimerStop(object generalTimer)
         {
             var timer = (System.Windows.Forms.Timer)generalTimer;
@@ -103,11 +106,12 @@ namespace Morze
         /// <param name="ofSignal">Строка сигналов: нулей и единиц</param>
         /// <param name="ABC">Словарь символов</param>
         /// <returns></returns>
-        public static string WaitDirectionAndOutput(ref System.Windows.Forms.Timer timer1,string ofSignal,Dictionary<string,char> ABC)
+        public static string WaitDirectionAndOutput(ref System.Windows.Forms.Timer timer1, string ofSignal, Dictionary<string, char> ABC)
         {
             int tempLengthTime = 0;
             timer1.Start();
             string result = "";
+
             while (true)
             {
                 tempLengthTime += timer1.Interval;
@@ -127,8 +131,6 @@ namespace Morze
             return result;
         }
 
-
-
         private void Button1_MouseDown(object sender, MouseEventArgs e)
         {
             StopThreadTimer.Start();
@@ -137,15 +139,15 @@ namespace Morze
         }
 
         private void Button1_MouseUp(object sender, MouseEventArgs e)
-        { 
+        {
             StopGeneralTimer.Start();
             button1.BackColor = Color.Red;
-            if (lengthOfTime<=1000)
+            if (lengthOfTime <= 1000)
             {
                 //короткий сигнал 
                 StringOfSignal += "0";
             }
-            if (lengthOfTime>1000)
+            if (lengthOfTime > 1000)
             {
                 //длинынй сигнал
                 StringOfSignal += "1";
@@ -154,6 +156,7 @@ namespace Morze
             StartThreadTimer.Start();
             //richTextBox1.Text+= WaitDirectionAndOutput(ref timer1, StringOfSignal,ABC);
             string result = "";
+
             while (true)
             {
                 if (lengthOfThreadTimer > 3000)
